@@ -238,6 +238,20 @@ const cutFansMedalName = () => {
           </ul>
           <p text="16px">十分感谢以上 项目 / 视频 提供的灵感，此项目是对以上项目的一些完善</p>
         </NCard>
+        <NCard>
+          <NH3 prefix="bar" type="info">
+            <NText type="info"> 免责声明 </NText>
+          </NH3>
+
+          <ul text="16px">
+            <li>
+              此项目只为有需要的人员进行方便快捷的制作 SC
+              图片，请勿用于无中生有甚至造谣主播、人身攻击
+            </li>
+            <li>任何因此项目生成的图片所产生的的造谣、虚假事实等，开发者概不负责</li>
+            <li>本项目生成的图片一律不能作为证据</li>
+          </ul>
+        </NCard>
       </div>
     </NLayoutContent>
     <NLayoutFooter></NLayoutFooter>

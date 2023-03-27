@@ -14,13 +14,6 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    proxy: {
-      '/devServer': {
-        target: 'http://43.142.172.170:8090/api',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/devServer/, ''),
-      },
-    },
     fs: {
       strict: false,
     },
