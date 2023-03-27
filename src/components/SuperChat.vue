@@ -26,7 +26,7 @@ watchEffect(() => {
 <template>
   <div
     id="SuperChat"
-    class="relative p-5px break-words ws-normal -m-x-5px m-y-10px min-w-130px min-h-38px"
+    class="relative p-5px break-words ws-normal -m-x-5px min-w-130px min-h-38px"
     text="12px #61666D"
     :style="{ width: `${props.width}px` }"
   >

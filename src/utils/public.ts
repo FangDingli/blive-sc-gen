@@ -14,7 +14,7 @@ export const dom2image = (domid: string) => {
       img.src = dataUrl
       document.body.appendChild(img) */
       const link = document.createElement('a')
-      link.download = 'sc-image-' + new Date() + '.png'
+      link.download = 'sc-image-' + new Date().toLocaleString() + '.png'
       link.href = dataUrl
       link.click()
       link.remove()

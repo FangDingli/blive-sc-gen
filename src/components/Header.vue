@@ -20,8 +20,8 @@ const openGithub = () => {
 
 <template>
   <div class="flex items-center">
-    <h2 class="w-full" text="center">
-      <NText type="info"> bilibili直播SC生成器 </NText>
+    <h2 class="w-full h-full" text="center">
+      <NText type="info"> bilibili直播SC图片生成器 </NText>
     </h2>
     <div class="ml-auto flex">
       <button

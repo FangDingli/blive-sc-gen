@@ -35,7 +35,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div id="SuperChatM" class="relative min-h-88px m-y-10px" :style="{ width: `${props.width}px` }">
+  <div id="SuperChatM" class="relative min-h-88px" :style="{ width: `${props.width}px` }">
     <div
       class="h-50px box-border flex justify-start items-center sc_card_head"
       bg="contain no-repeat right-top"
