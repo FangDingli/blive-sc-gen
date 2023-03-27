@@ -1,3 +1,4 @@
+// @ts-ignore
 import domtoimage from 'dom-to-image-more'
 
 export const currentTheme = ref<any>(null)

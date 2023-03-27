@@ -37,6 +37,7 @@ const startCountdown = () => {
 
 const superChatMComp = ref<InstanceType<typeof SuperChatM>>()
 
+// 图片被设置防盗链，因此转为base64
 let isLoading = ref<boolean>(false)
 
 const setBase64Avatar = async () => {
@@ -106,7 +107,7 @@ const cutFansMedalName = () => {
             :medalName="formValue.medalName"
             :medalLevel="formValue.medalLevel"
           ></SuperChat>
-          <NButton type="info" @click="dom2image('SuperChat')">导出为png</NButton>
+          <NButton class="m-y-10px" type="info" @click="dom2image('SuperChat')">导出为png</NButton>
           <NH5>
             <NText type="primary"> 样式2 </NText>
           </NH5>
@@ -121,7 +122,7 @@ const cutFansMedalName = () => {
             :transContent="formValue.transContent"
             :isVip="formValue.isVip"
           ></SuperChatM>
-          <NButton type="info" @click="dom2image('SuperChatM')">导出为png</NButton>
+          <NButton class="m-y-10px" type="info" @click="dom2image('SuperChatM')">导出为png</NButton>
         </NCard>
         <NCard>
           <NForm ref="formRef" :model="formValue" labelPlacement="left" labelWidth="auto">
@@ -159,7 +160,8 @@ const cutFansMedalName = () => {
               <NFormItemGi label="显示翻译">
                 <NSwitch v-model:value="formValue.showTrans"></NSwitch>
               </NFormItemGi>
-              <NFormItemGi v-show="formValue.showTrans" label="翻译内容">
+              <!-- 本来此处应该使用 v-show 但这样会触发 naive-ui grid 布局的一个bug，显示以后无法隐藏且控制台报错 -->
+              <NFormItemGi v-if="formValue.showTrans" label="翻译内容">
                 <NInput
                   v-model:value="formValue.transContent"
                   placeholder="输入翻译内容"
@@ -176,12 +178,12 @@ const cutFansMedalName = () => {
             <NFormItem label="显示粉丝牌">
               <NSwitch v-model:value="formValue.showFansMedal"></NSwitch>
             </NFormItem>
-            <NGrid v-show="formValue.showFansMedal" :cols="3" xGap="20" yGap="20">
+            <NGrid v-if="formValue.showFansMedal" :cols="3" xGap="20" yGap="20">
               <NFormItemGi label="粉丝牌名称">
                 <NInput
                   v-model:value="formValue.medalName"
-                  @blur="cutFansMedalName"
                   placeholder="输入粉丝牌名称"
+                  @blur="cutFansMedalName"
                 ></NInput>
               </NFormItemGi>
               <NFormItemGi label="粉丝牌等级">
@@ -225,7 +227,9 @@ const cutFansMedalName = () => {
           </NH3>
           <p text="20px">
             作者的bilibili:
-            <NA href="https://space.bilibili.com/23598218" target="_blank">归墟_丶</NA>
+            <NA class="no-underline" href="https://space.bilibili.com/23598218" target="_blank"
+              >归墟_丶</NA
+            >
           </p>
           <p text="20px">Inspired by</p>
           <ul text="16px">

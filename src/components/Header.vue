@@ -14,7 +14,7 @@ const switchTheme = () => {
 }
 
 const openGithub = () => {
-  window.open('https://www.github.com/Fangdingli')
+  window.open('https://github.com/FangDingli/blive-sc-gen')
 }
 </script>
 
