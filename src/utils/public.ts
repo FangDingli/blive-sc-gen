@@ -10,7 +10,7 @@ export const dom2image = (domid: string) => {
   const height = dom?.offsetHeight
   domtoimage
     .toPng(dom, { width, height })
-    .then(function (dataUrl: any) {
+    .then(function (dataUrl: string) {
       /* const img = new Image()
       img.src = dataUrl
       document.body.appendChild(img) */
