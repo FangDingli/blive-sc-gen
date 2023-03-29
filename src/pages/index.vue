@@ -143,6 +143,7 @@ const cutFansMedalName = () => {
                   placeholder="SC电池数，最小300"
                   :min="300"
                   :max="9999999"
+                  :step="100"
                 ></NInputNumber>
               </NFormItemGi>
               <NFormItemGi label="SC内容">
