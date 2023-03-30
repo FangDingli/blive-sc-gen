@@ -3,7 +3,6 @@ import { getColorByPrice, nameColorByRole, scBadgeByPrice } from '~/utils'
 
 interface Props {
   width: number
-  scale: number
   battery: number
   userName: string
   userRole: string
@@ -13,7 +12,7 @@ interface Props {
   showFansMedal: boolean
   medalName: string
   medalLevel: number
-  isThousandsGuard: boolean
+  guardMileStone: '0' | 'k' | 'w'
 }
 
 const props = defineProps<Props>()
@@ -46,7 +45,7 @@ watchEffect(() => {
             :userRole="props.userRole"
             :medalName="props.medalName"
             :medalLevel="props.medalLevel"
-            :isThousandsGuard="props.isThousandsGuard"
+            :guardMileStone="props.guardMileStone"
           ></FansMedal>
         </div>
         <div

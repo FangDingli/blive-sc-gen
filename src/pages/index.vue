@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type SuperChatM from '~/components/SuperChatM.vue'
-import { getBase64FromUrl, userRoleDict, dom2image } from '~/utils'
-import type { FormInst } from 'naive-ui'
+import { userRoleDict, exportPngFile } from '~/utils'
+import type { FormInst, DropdownOption } from 'naive-ui'
 
 const formRef = ref<FormInst | null>(null)
 const formValue = ref<ConfigOption>({
@@ -17,8 +17,7 @@ const formValue = ref<ConfigOption>({
   medalLevel: 27,
   uid: '23598218',
   isVip: true,
-  isThousandsGuard: false,
-  overTenKGuard: false,
+  guardMileStone: '0',
 })
 
 const message = useMessage()
@@ -42,7 +41,24 @@ const superChatMComp = ref<InstanceType<typeof SuperChatM>>()
 // 图片被设置防盗链，因此转为base64
 let isLoading = ref<boolean>(false)
 
-const setBase64Avatar = async () => {
+const setAvatar = async () => {
+  isLoading.value = true
+
+  const { data, isFetching } = await useFetch(
+    `https://api.obfs.dev/api/bilibili/v3/user_info?uid=${formValue.value.uid}`
+  )
+    .get()
+    .json()
+  isLoading.value = isFetching.value
+  if (data.value.message === '0') {
+    superChatMComp.value!.face = data.value.data.card.face
+  } else {
+    message.error('请求失败' + data.value.message)
+  }
+  startCountdown()
+}
+
+/* const setBase64Avatar = async () => {
   isLoading.value = true
 
   const { data } = await useFetch(
@@ -52,13 +68,13 @@ const setBase64Avatar = async () => {
     .json()
   if (data.value.message === '0') {
     const base64 = (await getBase64FromUrl(data.value.data.card.face)) as string
-    superChatMComp.value!.faceBase64 = base64
+    superChatMComp.value!.face = base64
   } else {
     message.error('请求失败')
   }
   isLoading.value = false
   startCountdown()
-}
+} */
 
 const onlyAllowNumber = (value: string) => !value || /^\d+$/.test(value)
 
@@ -80,6 +96,44 @@ function reBytesStr(str: string, len: number) {
 const cutFansMedalName = () => {
   formValue.value.medalName = reBytesStr(formValue.value.medalName!, 6)
 }
+
+const dropDownMenu = ref<DropdownOption[]>([
+  {
+    label: '8x放大',
+    key: 8,
+  },
+  {
+    label: '4x放大',
+    key: 4,
+  },
+  {
+    label: '2x放大',
+    key: 2,
+  },
+  {
+    label: '默认大小',
+    key: 1,
+  },
+])
+
+const handleDropDownSelect = (key: number, domid: string) => {
+  exportPngFile(domid, key)
+}
+
+const guardRadioOpt = ref([
+  {
+    label: '其他',
+    value: '0',
+  },
+  {
+    label: '千舰',
+    value: 'k',
+  },
+  {
+    label: '万舰',
+    value: 'w',
+  },
+])
 </script>
 
 <template>
@@ -108,9 +162,16 @@ const cutFansMedalName = () => {
             :showFansMedal="formValue.showFansMedal"
             :medalName="formValue.medalName"
             :medalLevel="formValue.medalLevel"
-            :isThousandsGuard="formValue.isThousandsGuard"
+            :guardMileStone="formValue.guardMileStone"
           ></SuperChat>
-          <NButton class="m-y-10px" type="info" @click="dom2image('SuperChat')">导出为png</NButton>
+          <NDropdown
+            trigger="click"
+            :options="dropDownMenu"
+            @select="$event => handleDropDownSelect($event, 'SuperChat')"
+          >
+            <NButton class="m-y-10px" type="info">导出为png</NButton>
+          </NDropdown>
+
           <NH5>
             <NText type="primary"> 样式2 </NText>
           </NH5>
@@ -124,10 +185,15 @@ const cutFansMedalName = () => {
             :showTrans="formValue.showTrans"
             :transContent="formValue.transContent"
             :isVip="formValue.isVip"
-            :isThousandsGuard="formValue.isThousandsGuard"
-            :overTenKGuard="formValue.overTenKGuard"
+            :guardMileStone="formValue.guardMileStone"
           ></SuperChatM>
-          <NButton class="m-y-10px" type="info" @click="dom2image('SuperChatM')">导出为png</NButton>
+          <NDropdown
+            trigger="click"
+            :options="dropDownMenu"
+            @select="$event => handleDropDownSelect($event, 'SuperChatM')"
+          >
+            <NButton class="m-y-10px" type="info">导出为png</NButton>
+          </NDropdown>
         </NCard>
         <NCard>
           <NForm ref="formRef" :model="formValue" labelPlacement="left" labelWidth="auto">
@@ -176,11 +242,18 @@ const cutFansMedalName = () => {
                   :autosize="{ minRows: 1 }"
                 ></NInput>
               </NFormItemGi>
-              <NFormItemGi label="千舰图标">
+              <!-- <NFormItemGi label="千舰图标">
                 <NSwitch v-model:value="formValue.isThousandsGuard"></NSwitch>
               </NFormItemGi>
               <NFormItemGi label="万舰头像框">
                 <NSwitch v-model:value="formValue.overTenKGuard"></NSwitch>
+              </NFormItemGi> -->
+              <NFormItemGi label="舰队里程碑">
+                <NRadioGroup v-model:value="formValue.guardMileStone">
+                  <NRadio v-for="item in guardRadioOpt" :key="item.value" :value="item.value">{{
+                    item.label
+                  }}</NRadio>
+                </NRadioGroup>
               </NFormItemGi>
             </NGrid>
 
@@ -223,7 +296,7 @@ const cutFansMedalName = () => {
                   type="info"
                   :loading="isLoading"
                   :disabled="timer !== 0"
-                  @click="setBase64Avatar"
+                  @click="setAvatar"
                   >获取头像{{ timer === 0 ? '' : timer }}</NButton
                 >
               </NFormItemGi>

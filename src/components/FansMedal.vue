@@ -5,12 +5,12 @@ interface Props {
   userRole: UserRole
   medalName: string
   medalLevel: number
-  isThousandsGuard: boolean
+  guardMileStone: '0' | 'k' | 'w'
 }
 
 const props = defineProps<Props>()
 
-let guardImg = new URL(`../assets/images/guard-${props.userRole}.webp`, import.meta.url).href
+let guardImg = ''
 
 const medalColor = ref<{ start: string; end: string }>({ start: '', end: '' })
 
@@ -19,7 +19,9 @@ watchEffect(() => {
 })
 watchEffect(() => {
   guardImg = new URL(
-    `../assets/images/guard-${props.userRole}${props.isThousandsGuard ? '-k' : ''}.webp`,
+    `../assets/images/guard-${props.userRole}-${
+      props.guardMileStone === 'w' ? 'k' : props.guardMileStone
+    }.png`,
     import.meta.url
   ).href
 })
@@ -45,8 +47,8 @@ watchEffect(() => {
           v-show="props.userRole !== '0'"
           class="block -ml-12px mr-2px w22px h22px"
           bg="no-repeat contain center-center"
-          :style="{ backgroundImage: props.userRole === '0' ? '' : `url(${guardImg})` }"
         >
+          <img class="w-full h-full" :src="props.userRole === '0' ? '' : `${guardImg}`" alt="" />
         </i>
         <span class="block">{{ props.medalName }}</span>
       </div>

@@ -16,7 +16,6 @@ declare global {
     medalLevel?: number
     uid?: string
     isVip?: boolean
-    isThousandsGuard?: boolean
-    overTenKGuard?: boolean
+    guardMileStone?: '0' | 'k' | 'w'
   }
 }
