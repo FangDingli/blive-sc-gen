@@ -2,16 +2,13 @@
 import { getMedalColorByLevel, medalBorderColor } from '../utils'
 
 interface Props {
-  userRole?: UserRole
-  medalName?: string
-  medalLevel?: number
+  userRole: UserRole
+  medalName: string
+  medalLevel: number
+  isThousandsGuard: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  userRole: '3',
-  medalName: '苑大头',
-  medalLevel: 27,
-})
+const props = defineProps<Props>()
 
 let guardImg = new URL(`../assets/images/guard-${props.userRole}.webp`, import.meta.url).href
 
@@ -21,7 +18,10 @@ watchEffect(() => {
   medalColor.value = getMedalColorByLevel(props.medalLevel)
 })
 watchEffect(() => {
-  guardImg = new URL(`../assets/images/guard-${props.userRole}.webp`, import.meta.url).href
+  guardImg = new URL(
+    `../assets/images/guard-${props.userRole}${props.isThousandsGuard ? '-k' : ''}.webp`,
+    import.meta.url
+  ).href
 })
 </script>
 

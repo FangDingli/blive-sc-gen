@@ -17,6 +17,8 @@ const formValue = ref<ConfigOption>({
   medalLevel: 27,
   uid: '23598218',
   isVip: true,
+  isThousandsGuard: false,
+  overTenKGuard: false,
 })
 
 const message = useMessage()
@@ -106,6 +108,7 @@ const cutFansMedalName = () => {
             :showFansMedal="formValue.showFansMedal"
             :medalName="formValue.medalName"
             :medalLevel="formValue.medalLevel"
+            :isThousandsGuard="formValue.isThousandsGuard"
           ></SuperChat>
           <NButton class="m-y-10px" type="info" @click="dom2image('SuperChat')">导出为png</NButton>
           <NH5>
@@ -121,6 +124,8 @@ const cutFansMedalName = () => {
             :showTrans="formValue.showTrans"
             :transContent="formValue.transContent"
             :isVip="formValue.isVip"
+            :isThousandsGuard="formValue.isThousandsGuard"
+            :overTenKGuard="formValue.overTenKGuard"
           ></SuperChatM>
           <NButton class="m-y-10px" type="info" @click="dom2image('SuperChatM')">导出为png</NButton>
         </NCard>
@@ -170,6 +175,12 @@ const cutFansMedalName = () => {
                   class="min-w-50%"
                   :autosize="{ minRows: 1 }"
                 ></NInput>
+              </NFormItemGi>
+              <NFormItemGi label="千舰图标">
+                <NSwitch v-model:value="formValue.isThousandsGuard"></NSwitch>
+              </NFormItemGi>
+              <NFormItemGi label="万舰头像框">
+                <NSwitch v-model:value="formValue.overTenKGuard"></NSwitch>
               </NFormItemGi>
             </NGrid>
 
