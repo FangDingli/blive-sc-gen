@@ -27,6 +27,7 @@ export const exportPngFile = async (domid: string, scale: number) => {
   const canvas: HTMLCanvasElement = await html2canvas(document.getElementById(domid)!, {
     scale,
     backgroundColor: null,
+    useCORS: true,
   })
   // 尝试修复最新版 Chrome 下载文件会提示安全问题并把文件拦截，发现转为 blob 依然会拦截，那就略过这步
   // const blob = await fetch(canvas.toDataURL('image/png')).then(res => res.blob())
