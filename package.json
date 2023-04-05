@@ -1,7 +1,7 @@
 {
   "name": "bililive-sc-gen",
   "private": "true",
-  "packageManager": "pnpm@7.27.0",
+  "packageManager": "pnpm@8.1.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

@@ -48,7 +48,7 @@ watchEffect(() => {
       p="y-8px x-10px"
       border="1px solid rd-t-6px"
     >
-      <div class="overflow-hidden">
+      <div class="">
         <div class="w40px h40px b-rd-17px overflow-hidden" bg="cover center-center no-repeat">
           <img :src="face" class="w-full h-full" alt="" />
         </div>
@@ -57,7 +57,7 @@ watchEffect(() => {
           pos="top-4px left-10px"
           bg="cover center-center no-repeat"
         >
-          <img :src="faceFrame" class="w-full h-full" alt="" />
+          <img v-show="userRole !== '0'" :src="faceFrame" class="w-full h-full" alt="" />
         </div>
       </div>
       <div class="w-full text-#333" m="t-2px r-0 b-0 l-6px" flex="~ col">
