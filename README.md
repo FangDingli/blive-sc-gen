@@ -6,7 +6,7 @@
 - 多种样式，同时实现 web 端与手机端 SC 样式
 - 细节完善，粉丝牌、头像框、小装饰等均为 B站最新静态资源
 - 高度还原，毕竟直接抄的 CSS 代码（
-- 一键导出，基于 [dom-to-image-more](https://github.com/1904labs/dom-to-image-more) 生成 SVG 并导出为 PNG
+- 一键导出，基于 [html2canvas](https://github.com/niklasvh/html2canvas) 生成 SVG 并导出为 PNG
 
 ## 免责声明
 此项目只为有需要的人员进行方便快捷的制作 SC 图片，请勿用于无中生有甚至造谣主播、人身攻击
@@ -20,3 +20,10 @@
 此项目灵感来源于
 - [BV1AY41197ih](https://www.bilibili.com/video/BV1AY41197ih) 感谢 `禾与黍` 善于发现的眼睛，正是刷到这个视频才了解到此需求并萌生了制作 web 版的想法
 - [SC-Generator](https://github.com/Hicircum/SC-Generator) 感谢 `Hicircum` 超强的行动力，在我刚有想法时便已制作出了在线版。此项目部分灵感与布局也参考了这个在线版，如 控制宽度的滑动条等。 鞠躬！
+
+头像接口
+感谢 [LAPLACE 开放平台](https://subspace.institute/) 提供的 `Bilibili Avatar as a Service` 服务
+
+2024-07-12 更新 后续计划
+- [ ] 代码重构，主要升级各个依赖至最新版
+- [ ] 适配新版粉丝牌并提供旧版新版切换功能  

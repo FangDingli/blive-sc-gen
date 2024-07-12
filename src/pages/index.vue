@@ -26,10 +26,12 @@ let timer = ref(0)
 let interval: any = null
 
 const startCountdown = () => {
+  isLoading.value = true
   timer.value = 5
   setInterval(() => {
     if (timer.value === 0) {
       clearInterval(interval)
+      isLoading.value = false
     } else {
       timer.value--
     }
@@ -42,9 +44,9 @@ const superChatMComp = ref<InstanceType<typeof SuperChatM>>()
 let isLoading = ref<boolean>(false)
 
 const setAvatar = async () => {
-  isLoading.value = true
+  // isLoading.value = true
 
-  const { data, isFetching } = await useFetch(
+  /* const { data, isFetching } = await useFetch(
     `https://api.obfs.dev/api/bilibili/v3/user_info?uid=${formValue.value.uid}`
   )
     .get()
@@ -54,7 +56,8 @@ const setAvatar = async () => {
     superChatMComp.value!.face = data.value.data.card.face
   } else {
     message.error('请求失败' + data.value.message)
-  }
+  } */
+  superChatMComp.value!.face = `https://workers.vrp.moe/api/bilibili/avatar/${formValue.value.uid}`
   startCountdown()
 }
 
@@ -143,6 +146,9 @@ const guardRadioOpt = ref([
     </NLayoutHeader>
     <NLayoutContent embedded>
       <div class="container h-full m-x-auto app_main_container">
+        <!-- <NAlert type="warning" title="提醒改标题小助手" closable>
+          即将六月初，直播间标题以及个人头像、ID、签名等信息的修改将被暂时禁止，请及时提醒自家主播修改好相关信息
+        </NAlert> -->
         <NCard>
           <NH3 prefix="bar" type="info">
             <NText type="info"> 效果预览 </NText>
@@ -322,6 +328,14 @@ const guardRadioOpt = ref([
             <li><NA href="https://github.com/Hicircum/SC-Generator/">Circumcenter的在线版</NA></li>
           </ul>
           <p text="16px">十分感谢以上 项目 / 视频 提供的灵感，此项目是对以上项目的一些完善</p>
+          <p>2024 - 07 - 12</p>
+          <p>
+            感谢
+            <NA href="https://subspace.institute/docs/open-platform/bilibili-avatar"
+              >Laplace 开放平台</NA
+            >
+            提供的新头像接口
+          </p>
         </NCard>
         <NCard>
           <NH3 prefix="bar" type="info">
