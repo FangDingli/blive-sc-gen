@@ -12,7 +12,8 @@ case "$BRANCH" in
 esac
 
 echo "==> 部署分支: $BRANCH (base=$BASE)"
-npm run build -- --base=$BASE
+# Git Bash 的 MSYS 会把以 / 开头的参数当路径转换（/xxx → C:/Program Files/Git/xxx），必须禁用
+MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' npm run build -- --base=$BASE
 
 WORKTREE=.deploy-tmp
 git fetch origin deploy
@@ -41,4 +42,4 @@ git commit -m "deploy: $BRANCH ($(date '+%Y-%m-%d %H:%M'))" || echo "无变更�
 git push origin HEAD:deploy
 cd - >/dev/null
 git worktree remove --force "$WORKTREE"
-echo "==> 部署完成: https://fangdingli.github.io/blive-sc-gen${BASE%/}/ 或首页"
+echo "==> 部署完成: https://fangdingli.github.io${BASE%/}/"
