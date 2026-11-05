@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .fans-medal-item-ctnr {
+        cursor: default;
+        margin-left: 4px;
+        height: 16px;
+        margin-bottom: 4px;
+      }
+
+      .fans-medal-item-ctnr .fans-medal-item {
+        vertical-align: middle;
+      }
+
+      .fans-medal-item {
+        display: inline-flex;
+        align-items: center;
+        box-sizing: border-box;
+        height: 15px;
+        line-height: 15px;
+        color: #fff;
+        white-space: nowrap;
+        border-radius: 8px;
+        padding: 2px 6px 2px 2px;
+        font-family:
+          "Microsoft YaHei", "Microsoft Sans Serif", "Microsoft SanSerf",
+          "微软雅黑";
+        font-size: 12px;
+        position: relative;
+        cursor: default;
+      }
+
+      .fans-medal-item .fans-medal-label.guard {
+        padding-left: 12px;
+      }
+
+      .fans-medal-item .fans-medal-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 12px;
+        height: 12px;
+        color: #fff;
+      }
+
+      .fans-medal-item .fans-medal-label,
+      .fans-medal-item .fans-medal-level {
+        display: block;
+        box-sizing: content-box;
+        height: 100%;
+        text-align: center;
+        float: left;
+        z-index: 1;
+        position: relative;
+      }
+
+      .fans-medal-item .fans-medal-label .medal-deco.medal-guard {
+        margin-left: -12px;
+        width: 20px;
+        height: 20px;
+      }
+      .fans-medal-item .fans-medal-label .medal-deco {
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        width: 14px;
+        height: 14px;
+        margin-right: 2px;
+        position: absolute;
+        left: 6px;
+        z-index: 1;
+      }
+
+      .fans-medal-item .fans-medal-label .fans-medal-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 18px;
+        line-height: 18px;
+        transform: scale(0.8333);
+        margin-right: 2px;
+      }
+
+      .fans-medal-item .fans-medal-level {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        height: 12px;
+        width: 8px;
+        font-size: 12px;
+        text-align: center;
+        color: transparent;
+        position: relative;
+      }
+
+      .fans-medal-item .fans-medal-level .fans-medal-level-font {
+        font-family: fonteditor, sans-serif;
+        height: 18px !important;
+        line-height: 19px !important;
+        letter-spacing: -0.3px !important;
+        transform: scale(0.917) !important;
+      }
+
+      .fans-medal-item::after {
+        position: absolute;
+        content: "";
+        border: 1px solid var(--borderColor);
+        width: 200%;
+        height: 200%;
+        transform: translateX(-50%) translateY(-50%) scale(0.5, 0.5);
+        border-radius: 15px;
+        left: 50%;
+        top: 50%;
+        background-image: inherit;
+      }
+
+      .card-detail[data-v-3323a6d6] {
+        position: relative;
+        margin: 50px 16px 10px;
+        z-index: 2;
+        min-height: 88px;
+      }
+      .card-detail .card-item-middle-top[data-v-3323a6d6] {
+        border-radius: 6px 6px 0 0;
+        height: 50px;
+        background-position: 100% center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      /* 1000电池 card-item-middle-top
+        border: 1px solid rgb(226, 181, 43);
+            background-image: url((未知));
+            background-color: rgb(255, 241, 197); */
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-left
+        .icon-face-frame[data-v-3323a6d6],
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-left
+        .icon-face[data-v-3323a6d6] {
+        width: 30px;
+        height: 30px;
+        border-radius: 17px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      /*icon-face background-image: url(https://i2.hdslb.com/bfs/face/c1786f4….webp);*/
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-left
+        .icon-face-frame[data-v-3323a6d6] {
+        width: 34px;
+        height: 34px;
+        position: absolute;
+        top: 9px;
+        left: 9px;
+      }
+      /*icon-face-frame  background-image: url(https://i0.hdslb.com/bfs/live/80f7329….png);*/
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right[data-v-3323a6d6] {
+        margin: 2px 0 0 6px;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        width: 100%;
+      }
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right
+        .superchat-name[data-v-3323a6d6] {
+        opacity: 0.78;
+        font-size: 12px;
+      }
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right
+        .content-bottom[data-v-3323a6d6] {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right
+        .content-bottom
+        .price[data-v-3323a6d6] {
+        margin-top: 2px;
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      .card-detail .card-item-middle-bottom[data-v-3323a6d6] {
+        position: relative;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        border-radius: 2px 2px 6px 6px;
+        min-height: 38px;
+      }
+      /*.card-item-middle-bottom background-color: rgb(226, 181, 43);*/
+
+      .card-detail .card-item-middle-bottom .input-contain[data-v-3323a6d6],
+      .card-detail
+        .card-item-middle-bottom
+        .input-trans-contain[data-v-3323a6d6] {
+        position: relative;
+        min-height: 12px;
+        word-wrap: break-word;
+      }
+
+      .card-detail
+        .card-item-middle-bottom
+        .input-contain
+        .text[data-v-3323a6d6],
+      .card-detail
+        .card-item-middle-bottom
+        .input-trans-contain
+        .text[data-v-3323a6d6] {
+        font-size: 12px;
+        color: #fff;
+        text-align: left;
+        line-height: 20px;
+      }
+
+      .chat-history-panel .chat-history-list .chat-item.superChat-card-detail {
+        margin-left: -5px;
+        margin-right: -5px;
+        min-height: 38px;
+      }
+      .chat-history-panel .chat-history-list .chat-item.danmaku-item {
+        position: relative;
+        color: var(--text2);
+        line-height: 18px;
+        word-wrap: break-word;
+        white-space: normal;
+      }
+      .chat-history-panel .chat-history-list .chat-item {
+        padding: 5px;
+      }
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-top-right {
+        padding: 0 4px;
+        position: absolute;
+        top: 10px;
+        right: 8px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 0 5px 0 4px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-top {
+        border-radius: 6px 6px 0 0;
+        height: 34px;
+        background-position: right top;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 0 5px 0 5px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right {
+        width: 231px;
+        margin-left: 0;
+        display: inline-block;
+        color: #333;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right
+        .superChat-base {
+        display: inline-flex;
+        width: auto;
+        vertical-align: text-bottom;
+        height: 27px;
+        line-height: 27px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .admin-icon,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .anchor-icon,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .fans-medal-item-ctnr,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .guard-icon,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .title-label,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .user-level-icon {
+        margin-right: 3px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.danmaku-item
+        .fans-medal-item-ctnr
+        .fans-medal-item {
+        vertical-align: middle;
+      }
+
+      .fans-medal-item .fans-medal-label.guard {
+        padding-left: 12px;
+      }
+
+      .fans-medal-item .fans-medal-label .medal-deco.medal-guard {
+        margin-left: -12px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .fans-medal-item .fans-medal-label .medal-deco {
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        width: 14px;
+        height: 14px;
+        margin-right: 2px;
+        position: absolute;
+        left: 6px;
+        z-index: 1;
+      }
+
+      .fans-medal-item .fans-medal-label .fans-medal-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 18px;
+        line-height: 18px;
+        transform: scale(0.8333);
+        margin-right: 2px;
+      }
+
+      .fans-medal-item .fans-medal-level {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        height: 12px;
+        width: 8px;
+        font-size: 12px;
+        text-align: center;
+        color: transparent;
+        position: relative;
+      }
+
+      .fans-medal-item .fans-medal-level .fans-medal-level-font {
+        font-family: fonteditor, sans-serif;
+        height: 18px !important;
+        line-height: 19px !important;
+        letter-spacing: -0.3px !important;
+        transform: scale(0.917) !important;
+      }
+
+      .fans-medal-item::after {
+        position: absolute;
+        content: "";
+        border: 1px solid var(--borderColor);
+        width: 200%;
+        height: 200%;
+        transform: translateX(-50%) translateY(-50%) scale(0.5, 0.5);
+        border-radius: 15px;
+        left: 50%;
+        top: 50%;
+        background-image: inherit;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-top
+        .card-item-middle-top-right
+        .card-item-name {
+        width: 125px;
+        opacity: 0.78;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: text-bottom;
+        height: 27px;
+        line-height: 27px;
+        margin-left: 4px;
+        font-weight: 700;
+      }
+
+      .common-nickname-wrapper {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        overflow: hidden;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom {
+        position: relative;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        border-radius: 0 0 6px 6px;
+        min-height: 38px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-contain,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-trans-contain {
+        position: relative;
+        min-height: 12px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-contain
+        .text,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-trans-contain
+        .text {
+        font-size: 12px;
+        color: #fff;
+        text-align: left;
+        line-height: 20px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-trans-contain {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid rgba(245, 245, 245, 0.33);
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-contain,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-trans-contain {
+        position: relative;
+        min-height: 12px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-contain
+        .text,
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .input-trans-contain
+        .text {
+        font-size: 12px;
+        color: #fff;
+        text-align: left;
+        line-height: 20px;
+      }
+
+      .chat-history-panel
+        .chat-history-list
+        .chat-item.superChat-card-detail
+        .card-item-middle-bottom
+        .bottom-background {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>粉丝牌</h1>
+    <div
+      class="fans-medal-item-ctnr fans-medal-item-target dp-i-block p-relative v-middle"
+      title="这是 TA 的粉丝勋章 (=・ω・=)"
+      style="margin-left: 1px"
+      data-anchor-id="3494369904560916"
+    >
+      <!--这里 background-image border-color 根据粉丝牌等级动态调整-->
+      <div
+        style="
+          --borderColor: #d47aff;
+          background-image: linear-gradient(45deg, #a773f199, #a773f199);
+        "
+        class="fans-medal-item"
+      >
+        <!--这里如果是普通用户就是 fans-medal-label false false-->
+        <div class="fans-medal-label false guard">
+          <!--这里舰长、提督、总督对应不同的 background-image，达到百舰、千舰、万舰也有不同的 background-image-->
+          <i
+            class="medal-deco medal-guard"
+            style="
+              background-image: url(https://i0.hdslb.com/bfs/live/62ac06fd72b05fe22be26426b9e1a8e1fc2c6b89.png@44w_44h.webp);
+            "
+          ></i>
+          <div class="fans-medal-content" :style="color: #FFFFFF">纱纱仁</div>
+        </div>
+        <div class="fans-medal-level">
+          <div class="fans-medal-level-font" style="color: #ffffff">42</div>
+        </div>
+      </div>
+    </div>
+
+    <h1>样式2 出现在点开置顶SC详情后</h1>
+    <div data-v-3323a6d6="" data-v-7b9d1a30="" class="card-detail">
+      <!--这里 background-color border-color 根据金额动态调整-->
+      <!-- url("https://i0.hdslb.com/bfs/live/2f90cef5bc1c88b98dfb9f2697c970270ba326fe.png@100h_1e_80q.avif") -->
+      <div
+        data-v-3323a6d6=""
+        class="card-item-middle-top"
+        style="
+          border: 1px solid rgb(226, 181, 43);
+          background-image: url(&quot;&quot;);
+          background-color: rgb(255, 241, 197);
+        "
+      >
+        <div data-v-3323a6d6="" class="card-item-middle-top-left">
+          <div
+            data-v-3323a6d6=""
+            class="icon-face"
+            style="
+              background-image: url(&quot;https://i2.hdslb.com/bfs/face/c1786f45f115ec8fa6f2d6998a2843044fb9e39e.webp&quot;);
+            "
+          ></div>
+          <!--这里舰长、提督、总督对应不同的 background-image，达到百舰、千舰、万舰也有不同的 background-image-->
+          <div
+            data-v-3323a6d6=""
+            class="icon-face-frame"
+            style="
+              background-image: url(&quot;https://i0.hdslb.com/bfs/live/80f732943cc3367029df65e267960d56736a82ee.png&quot;);
+            "
+          ></div>
+        </div>
+        <div data-v-3323a6d6="" class="card-item-middle-top-right">
+          <!--如果是大会员那么这里名字颜色是 #f9708e-->
+          <div data-v-3323a6d6="" class="superchat-name">Xbb今天玩什么</div>
+          <div data-v-3323a6d6="" class="content-bottom">
+            <div data-v-3323a6d6="" class="price">1000电池</div>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!--这里 background-color 根据金额动态调整-->
+      <div
+        data-v-3323a6d6=""
+        class="card-item-middle-bottom"
+        style="background-color: rgb(226, 181, 43)"
+      >
+        <div data-v-3323a6d6="" class="input-contain">
+          <span data-v-3323a6d6="" class="text"
+            >我说好事多磨有感觉吗，磨多磨多黑白炫彩！</span
+          >
+        </div>
+        <!----><!---->
+      </div>
+      <div data-v-3323a6d6="" class="more"></div>
+      <!---->
+    </div>
+
+    <h1>
+      样式1 出现在直播画面右侧的弹幕历史里, 这里外层手动加上原网页自带的
+      .chat-history-panel 和 .chat-history-list 避免覆盖上面的CSS
+    </h1>
+    <div class="chat-history-panel">
+      <div class="chat-history-list">
+        <div
+          class="chat-item danmaku-item superChat-card-detail"
+          data-uname="o_Ohiahiahiahia"
+          data-uid="3546603222730983"
+          data-ts="1781864200"
+          data-ct="43A146F8"
+          data-danmaku="豬豬端午快樂🎉"
+        >
+          <div class="card-item-top-right">20电池</div>
+          <!--这里 background-color border-color 根据金额动态调整-->
+          <div
+            class="card-item-middle-top"
+            style="
+              background-image: url();
+              border: 1px solid rgb(42, 96, 178);
+              background-color: rgb(237, 245, 255);
+            "
+          >
+            <div class="card-item-middle-top-right">
+              <div class="superChat-base">
+                <!--这里是粉丝牌-->
+                <div
+                  class="fans-medal-item-ctnr fans-medal-item-target dp-i-block p-relative v-middle"
+                  title="这是 TA 的粉丝勋章 ●ω●"
+                  style="margin-left: 1px"
+                  data-anchor-id="194484313"
+                >
+                  <div
+                    style="
+                      --borderColor: #5fc7f4;
+                      background-image: linear-gradient(
+                        45deg,
+                        #3fb4f699,
+                        #3fb4f699
+                      );
+                    "
+                    class="fans-medal-item"
+                  >
+                    <div class="fans-medal-label false guard">
+                      <i
+                        class="medal-deco medal-guard"
+                        style="
+                          background-image: url(https://i0.hdslb.com/bfs/live/fd26e0053f3d24672ffdabcb1f6d2545e26b1e33.png@44w_44h.webp);
+                        "
+                      ></i>
+                      <div class="fans-medal-content" :style="color: #FFFFFF">
+                        ASAKI
+                      </div>
+                    </div>
+                    <div class="fans-medal-level">
+                      <div class="fans-medal-level-font" style="color: #ffffff">
+                        24
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="common-nickname-wrapper card-item-name">
+                <!--这里如果不是舰长提督等付费用户名字就是 #666-->
+                <span style="color: #00d1f1">o_Ohiahiahiahia</span>
+              </div>
+            </div>
+          </div>
+          <!--这里 background-color 根据金额动态调整-->
+          <div
+            class="card-item-middle-bottom"
+            style="background-color: rgb(42, 96, 178)"
+          >
+            <div class="input-contain">
+              <span class="text">豬豬端午快樂🎉</span>
+            </div>
+            <div class="input-trans-contain" style="display: none">
+              <span class="text"></span>
+            </div>
+            <!-- 10000  3000 url("https://i0.hdslb.com/bfs/live/0d9cbbdbad7d3371266cd5b568065415415316ae.png@32w_32h_1e_1c_100q.avif")-->
+            <!--1314  url("https://i0.hdslb.com/bfs/live/0cf7b5fdc7084c9ae05f7a371ea2438118529d66.png@32w_32h_1e_1c_100q.avif")-->
+
+            <!--500 url("https://i0.hdslb.com/bfs/live/e12e931ed8d9e5189ab6d1a3a1da35af4f8a55af.png@32w_32h_1e_1c_100q.avif")-->
+            <div class="bottom-background"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
